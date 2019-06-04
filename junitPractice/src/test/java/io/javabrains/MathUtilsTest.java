@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -13,7 +14,8 @@ import org.junit.jupiter.api.TestInstance;
  * first, so there's always a risk of the test not running. So, this is a bad practice
  */
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("When running MathUtils")
 class MathUtilsTest {
 
 	MathUtils mathUtils;
@@ -25,14 +27,27 @@ class MathUtilsTest {
 		mathUtils = new MathUtils();
 	}
 	
-	@Test
-	@DisplayName("Testing add method") //Display this message instead of method name
-	void test() {
-		int expected = 2;
-		int actual = mathUtils.add(1, 1);
-		
-		assertEquals(expected, actual, "The add methood should add two numbers");
-	}
+	
+	  @Nested
+	  @DisplayName("add method") 
+	  class AddTest{
+	  
+	  @Test
+	  @DisplayName("When adding two positive numbers") //Display this message instead of method name 
+	  void testAdd() { int expected = 2; int actual =
+	  mathUtils.add(1, 1);
+	  
+	  assertEquals(expected, actual, "should add two numbers"); }
+	  
+	  @Test
+	  @DisplayName("Testing add method for positive number") //Display this message instead of method name 
+	  void test() { int expected = 2; int actual =
+	  mathUtils.add(1, 1);
+	  
+	  assertEquals(expected, actual, "The add methood should add two numbers"); }
+	  
+	  }
+	 
 	
 	@Test
 	void testDivide() {
@@ -52,7 +67,7 @@ class MathUtilsTest {
 	void testMultiply() {
 		assertAll(
 				()-> assertEquals(4, mathUtils.multiply(2, 2)),
-				() -> assertEquals(0, mathUtils.multiply(2, 0))
+				()-> assertEquals(0, mathUtils.multiply(2, 0))
 				);
 	}
 	
