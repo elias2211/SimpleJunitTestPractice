@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestReporter;
 
 /* you can use the below annotation if you would like to create an instance per class
  * the risk still is though, junit does not guarantee you which method is going to run
@@ -19,12 +21,17 @@ import org.junit.jupiter.api.TestInstance;
 class MathUtilsTest {
 
 	MathUtils mathUtils;
-	/* If you would like to use the before all @BeforeAll annotation, the method needs to be 
-	 Otherwise it wouldn't work. */
+	TestReporter testReporter;
+	TestInfo testInfo;
+	/* If you would like to use the before all @BeforeAll annotation, the method needs to be static
+	 otherwise it wouldn't work. */
 	
 	@BeforeEach
-	void init() {
+	void init(TestInfo testInfo, TestReporter testReporter) {
+		this.testInfo = testInfo;
+		this.testReporter = testReporter;
 		mathUtils = new MathUtils();
+		testReporter.publishEntry("Running" + testInfo.getDisplayName());
 	}
 	
 	
