@@ -36,7 +36,8 @@ class MathUtilsTest {
 	
 	@Test
 	void testDivide() {
-		assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0), "Divide");
+		assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0), "testing"
+				+ "divide method");
 	}
 	
 	@Test
